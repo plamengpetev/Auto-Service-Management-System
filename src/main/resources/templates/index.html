@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+
+<header>
+    <h1>Car Service</h1>
+</header>
+
+<main>
+    <p>Това е началната страница на уеб приложението.</p>
+   <!-- >
+    <a th:href="@{/about}" class="button">Научи повече</a>
+    <-->
+</main>
+
+
+<div th:insert="fragments/footer :: footer"></div>
+</body>
+</html>
