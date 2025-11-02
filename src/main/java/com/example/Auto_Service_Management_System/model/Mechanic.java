@@ -6,10 +6,10 @@ import lombok.*;
 import java.util.List;
 import java.util.UUID;
 
+@Entity
 @Builder
 @Getter
 @Setter
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 public class Mechanic {
@@ -18,19 +18,15 @@ public class Mechanic {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-
+    @Column(nullable = false)
     private String name;
 
-    @Column
+    @Column(nullable = false)
     private String specialization;
 
     @Column
     private String schedule;
 
-    @OneToMany(mappedBy = "mechanic")
+    @OneToMany(mappedBy = "mechanic", fetch = FetchType.LAZY)
     private List<ServiceRequest> serviceRequests;
-
-
-
-
 }

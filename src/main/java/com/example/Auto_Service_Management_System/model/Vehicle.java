@@ -6,10 +6,10 @@ import lombok.*;
 import java.util.List;
 import java.util.UUID;
 
+@Entity
 @Builder
 @Getter
 @Setter
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 public class Vehicle {
@@ -30,13 +30,14 @@ public class Vehicle {
     @Column(nullable = false, unique = true)
     private String registrationNumber;
 
-
     @ManyToOne
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer owner;
 
-    @OneToMany(mappedBy = "vehicle", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "vehicle", fetch = FetchType.LAZY)
     private List<ServiceRequest> serviceRequests;
 
-
+    public String getFullName() {
+        return brand + " " + model + " (" + year + ")";
+    }
 }

@@ -2,14 +2,12 @@ package com.example.Auto_Service_Management_System.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import java.util.*;
 
-import java.util.List;
-import java.util.UUID;
-
+@Entity
 @Builder
 @Getter
 @Setter
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 public class Customer {
@@ -23,15 +21,26 @@ public class Customer {
     @Column(nullable = false)
     private String lastName;
 
+    @Column(nullable = false)
+    private String username;
+
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
-    private String phone;
+    private String phoneNumber;
 
     @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
     private List<Vehicle> vehicles;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "customer_roles",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 }
