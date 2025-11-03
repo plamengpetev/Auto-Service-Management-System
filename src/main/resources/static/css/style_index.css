@@ -1,0 +1,61 @@
+
+
+
+body {
+    background-image: url("../images/BetaServiceLogo.png"); /* сложи тук името на твоя файл */
+    background-size: contain;        /* показва цялата картинка */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #f8f9fa;       /* светлосив фон */
+    height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+/* Полупрозрачен слой, за да се вижда текстът */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+}
+
+
+/* Стил за текста */
+.content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.content p {
+    font-size: 20px;
+    margin-bottom: 40px;
+}
+
+/* Бутони */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn {
+    background-color: #425f81;
+    color: white;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+

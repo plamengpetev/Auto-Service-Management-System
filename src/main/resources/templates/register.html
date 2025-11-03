@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Регистрация</title>
+  <link rel="stylesheet" th:href="@{/css/style_header.css}">
+  <link rel="stylesheet" th:href="@{/css/style_register.css}">
+  <link rel="stylesheet" th:href="@{/css/style_footer2.css}">
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="form-container">
+  <h2>Регистрация на клиент</h2>
+
+  <form th:action="@{/register}" th:object="${registerRequest}" method="post">
+    <label>Име:</label>
+    <input type="text" th:field="*{firstName}" placeholder="Въведи име"/>
+
+    <label>Фамилия:</label>
+    <input type="text" th:field="*{lastName}" placeholder="Въведи фамилия"/>
+
+    <label>username</label>
+    <input type="text" th:field="*{username}" placeholder="Въведи username"/>
+
+    <label>Имейл:</label>
+    <input type="email" th:field="*{email}" placeholder="Въведи имейл"/>
+
+    <label>Парола:</label>
+    <input type="password" th:field="*{password}" placeholder="Въведи парола"/>
+
+    <label>Телефон:</label>
+    <input type="text" th:field="*{phoneNumber}" placeholder="Въведи телефон"/>
+
+    <button type="submit">Регистрация</button>
+  </form>
+
+  <p>Вече имаш акаунт? <a th:href="@{/login}">Влез тук</a></p>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
