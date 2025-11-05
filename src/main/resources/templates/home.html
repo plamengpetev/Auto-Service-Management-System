@@ -1,0 +1,79 @@
+
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <title>Начало | Auto Service Management</title>
+  <link rel="stylesheet" th:href="@{/css/style_header2.css}">
+  <link rel="stylesheet" th:href="@{/css/style_home.css}">
+  <link rel="stylesheet" th:href="@{/css/style_footer2.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<header>
+  <div class="user-info" th:if="${loggedUserEmail}">
+    Добре дошъл, <span th:text="${loggedUserEmail}">потребител</span>!
+    <a th:href="@{/logout}">Изход</a>
+  </div>
+</header>
+
+<div class="home-container">
+
+  <!-- Ляво меню -->
+  <div class="sidebar">
+    <a th:href="@{/vehicles}" class="home-btn"><i class="fa-solid fa-car"></i> Моите автомобили</a>
+    <a th:href="@{/requests}" class="home-btn"><i class="fa-solid fa-clipboard-list"></i> Моите заявки</a>
+    <a th:href="@{/contact}" class="home-btn"><i class="fa-solid fa-envelope"></i> Контакти</a>
+    <a th:href="@{/logout}" class="home-btn logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Изход</a>
+  </div>
+
+  <!-- Дясна част -->
+  <div class="main-content">
+    <h1>Добре дошъл, <span th:text="${username}">Петър</span>!</h1>
+    <p>Управлявай автомобилите и заявките си лесно и бързо.</p>
+
+    <!-- Бързи действия -->
+    <div class="quick-actions">
+      <h2>Бързи действия</h2>
+      <div class="action-grid">
+        <a href="/vehicles/add" class="action-btn"><i class="fa-solid fa-plus"></i> Добави автомобил</a>
+        <a href="/requests/create" class="action-btn"><i class="fa-solid fa-wrench"></i> Нова заявка</a>
+        <a href="/requests" class="action-btn"><i class="fa-solid fa-clock-rotate-left"></i> История</a>
+      </div>
+    </div>
+
+    <!-- Мини статистика -->
+    <div class="dashboard-summary">
+      <div class="stat-card">
+        <h3>3</h3>
+        <p>Активни заявки</p>
+      </div>
+      <div class="stat-card">
+        <h3>2</h3>
+        <p>Моите автомобили</p>
+      </div>
+      <div class="stat-card">
+        <h3>1</h3>
+        <p>В процес</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>
+
+
+
+
+
