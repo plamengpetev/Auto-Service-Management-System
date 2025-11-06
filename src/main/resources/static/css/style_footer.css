@@ -1,0 +1,23 @@
+html, body {
+    height: 100%;            /* за да може flex да работи спрямо цялата страница */
+    margin: 0;               /* маха празнините по подразбиране */
+    display: flex;           /* включваме flex layout */
+    flex-direction: column;  /* подреждаме елементите вертикално */
+}
+
+main {
+    flex: 1; /* избутва футъра надолу, заема цялото налично пространство */
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgb(0, 0, 0, 0.0);
+    color: #fff;
+    text-align: center;
+    padding: 7px 0;
+    font-size: 0.9em;
+    border-top: 1px solid rgba(255, 255, 255, 0.0);
+}

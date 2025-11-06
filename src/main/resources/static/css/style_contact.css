@@ -1,0 +1,18 @@
+body {
+    background: url('../images/car.png') no-repeat center center fixed;
+
+    background-size: cover;
+
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+}
+
+.contact-container {
+    background-color: rgba(0, 0, 0, 0.65);
+    padding: 2rem 3rem;
+    border-radius: 15px;
+    width: 60%;
+    margin: 120px auto;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}

@@ -1,0 +1,81 @@
+body {
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)),
+    url("../images/mechanic.png");
+    background-size: cover;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Контейнер на формата */
+.form-container {
+    background-color: rgba(20, 20, 20, 0.85);
+    padding: 2rem 3rem;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    width: 400px;
+}
+
+/* Заглавие */
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #ffcc00;
+}
+
+/* Полетата */
+label {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #f4f4f4;
+    color: #000;
+}
+
+/* Бутон */
+button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background-color: #ffcc00;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background-color: #e6b800;
+    transform: scale(1.03);
+}
+
+/* Малък линк под формата */
+p {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.9em;
+}
+
+a {
+    color: #ffcc00;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
