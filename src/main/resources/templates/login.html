@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход</title>
+    <link rel="stylesheet" th:href="@{/css/style_header.css}">
+    <link rel="stylesheet" th:href="@{/css/style_login.css}">
+    <link rel="stylesheet" th:href="@{/css/style_footer2.css}">
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="form-container">
+    <h2>Вход в системата</h2>
+
+    <!-- 🚨 важно: без th:object, с име username/password -->
+    <form th:action="@{/login}" method="post">
+        <label>Имейл:</label>
+        <label>
+            <input type="email" name="email" placeholder="Въведи имейл" required>
+        </label>
+
+        <label>Парола:</label>
+        <label>
+            <input type="password" name="password" placeholder="Въведи парола" required>
+        </label>
+
+        <button type="submit">Вход</button>
+    </form>
+
+    <p th:if="${param.error}" style="color: red;">Невалиден имейл или парола.</p>
+
+    <p>Нямаш акаунт? <a href="/register">Регистрирай се</a></p>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>
