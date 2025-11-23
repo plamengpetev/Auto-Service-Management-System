@@ -1,6 +1,7 @@
 package com.example.Auto_Service_Management_System.web;
 
 import com.example.Auto_Service_Management_System.service.CustomerService;
+import com.example.Auto_Service_Management_System.service.ServiceRequestService;
 import com.example.Auto_Service_Management_System.web.dto.LoginRequest;
 import com.example.Auto_Service_Management_System.web.dto.RegisterRequest;
 import jakarta.validation.Valid;
@@ -20,14 +21,19 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class IndexController {
 
     private final CustomerService customerService;
+    private final ServiceRequestService serviceRequestService;
 
     @Autowired
-    public IndexController(CustomerService customerService) {
+    public IndexController(CustomerService customerService, ServiceRequestService serviceRequestService) {
         this.customerService = customerService;
+        this.serviceRequestService = serviceRequestService;
     }
 
     @GetMapping("/")
-    public String getIndexController() {
+    public String indexRedirect(Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            return "redirect:/home";
+        }
         return "index";
     }
 
@@ -48,7 +54,7 @@ public class IndexController {
         }
 
         customerService.register(registerRequest);
-        redirectAttributes.addFlashAttribute("successfulRegistration", "Регистрацията е успешна!");
+        redirectAttributes.addFlashAttribute("successfulRegistration", "Registration successful!");
         return new ModelAndView("redirect:/login");
     }
 
@@ -64,27 +70,15 @@ public class IndexController {
         return mav;
     }
 
-    @GetMapping("/home")
-    public String homePage(Model model, Authentication authentication) {
-        if (authentication == null || !authentication.isAuthenticated()) {
-            return "redirect:/login";
-        }
-
-        String username = authentication.getName(); // това е email-ът
-        model.addAttribute("username", username);
-
-        return "home";
-    }
-
     @ModelAttribute
     public void addLoggedUser(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.isAuthenticated() &&
-                !authentication.getPrincipal().equals("anonymousUser")) {
-            String username = authentication.getName(); // това е email-а на потребителя
+        if (authentication != null &&
+                authentication.isAuthenticated() &&
+                !"anonymousUser".equals(authentication.getPrincipal())) {
+
+            String username = authentication.getName();
             model.addAttribute("loggedUserEmail", username);
         }
     }
-
-
 }

@@ -1,44 +1,53 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Регистрация</title>
+  <title>Register</title>
   <link rel="stylesheet" th:href="@{/css/style_header.css}">
   <link rel="stylesheet" th:href="@{/css/style_register.css}">
   <link rel="stylesheet" th:href="@{/css/style_footer2.css}">
 </head>
 <body>
 
-<div th:replace="fragments/header :: header"></div>
-
 <div class="form-container">
-  <h2>Регистрация на клиент</h2>
+  <h2>Customer Registration</h2>
 
   <form th:action="@{/register}" th:object="${registerRequest}" method="post">
-    <label>Име:</label>
-    <input type="text" th:field="*{firstName}" placeholder="Въведи име"/>
+    <label>First Name:</label>
+    <label>
+      <input type="text" th:field="*{firstName}" placeholder="Enter first name" required/>
+    </label>
 
-    <label>Фамилия:</label>
-    <input type="text" th:field="*{lastName}" placeholder="Въведи фамилия"/>
+    <label>Last Name:</label>
+    <label>
+      <input type="text" th:field="*{lastName}" placeholder="Enter last name" required/>
+    </label>
 
-    <label>username</label>
-    <input type="text" th:field="*{username}" placeholder="Въведи username"/>
+    <label>Username:</label>
+    <label>
+      <input type="text" th:field="*{username}" placeholder="Enter username" required/>
+    </label>
 
-    <label>Имейл:</label>
-    <input type="email" th:field="*{email}" placeholder="Въведи имейл"/>
+    <label>Email:</label>
+    <label>
+      <input type="email" th:field="*{email}" placeholder="Enter email" required/>
+    </label>
 
-    <label>Парола:</label>
-    <input type="password" th:field="*{password}" placeholder="Въведи парола"/>
+    <label>Password:</label>
+    <label>
+      <input type="password" th:field="*{password}" placeholder="Enter password" required/>
+    </label>
 
-    <label>Телефон:</label>
-    <input type="text" th:field="*{phoneNumber}" placeholder="Въведи телефон"/>
+    <label>Phone Number:</label>
+    <label>
+      <input type="text" th:field="*{phoneNumber}" placeholder="Enter phone number" required/>
+    </label>
 
-    <button type="submit">Регистрация</button>
+    <button type="submit">Register</button>
   </form>
 
-  <p>Вече имаш акаунт? <a th:href="@{/login}">Влез тук</a></p>
+  <p>Already have an account? <a th:href="@{/login}">Log in here</a></p>
 </div>
 
-<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

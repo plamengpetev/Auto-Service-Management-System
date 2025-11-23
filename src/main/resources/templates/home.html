@@ -1,79 +1,58 @@
-
-
-
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en-GB">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Начало | Auto Service Management</title>
-  <link rel="stylesheet" th:href="@{/css/style_header2.css}">
+  <title>Home | Auto Service Management</title>
+  <link rel="stylesheet" th:href="@{/css/style_header.css}">
   <link rel="stylesheet" th:href="@{/css/style_home.css}">
   <link rel="stylesheet" th:href="@{/css/style_footer2.css}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-<header>
-  <div class="user-info" th:if="${loggedUserEmail}">
-    Добре дошъл, <span th:text="${loggedUserEmail}">потребител</span>!
-    <a th:href="@{/logout}">Изход</a>
-  </div>
-</header>
+<div th:replace="fragments/header :: header"></div>
 
 <div class="home-container">
 
-  <!-- Ляво меню -->
   <div class="sidebar">
-    <a th:href="@{/vehicles}" class="home-btn"><i class="fa-solid fa-car"></i> Моите автомобили</a>
-    <a th:href="@{/requests}" class="home-btn"><i class="fa-solid fa-clipboard-list"></i> Моите заявки</a>
-    <a th:href="@{/contact}" class="home-btn"><i class="fa-solid fa-envelope"></i> Контакти</a>
-    <a th:href="@{/logout}" class="home-btn logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Изход</a>
+    <a th:href="@{/my_vehicles}" class="home-btn"><i class="fa-solid fa-car"></i> My Vehicles</a>
+    <a th:href="@{/requests}" class="home-btn"><i class="fa-solid fa-clipboard-list"></i> My Requests</a>
+    <a th:href="@{/contact}" class="home-btn"><i class="fa-solid fa-envelope"></i> Contact</a>
+    <a th:href="@{/logout}" class="home-btn logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
   </div>
 
-  <!-- Дясна част -->
   <div class="main-content">
-    <h1>Добре дошъл, <span th:text="${username}">Петър</span>!</h1>
-    <p>Управлявай автомобилите и заявките си лесно и бързо.</p>
+    <h1>Welcome, <span th:text="${username}">User</span>!</h1>
+    <p>Manage your vehicles and service requests quickly and easily.</p>
 
-    <!-- Бързи действия -->
     <div class="quick-actions">
-      <h2>Бързи действия</h2>
+      <h2>Quick Actions</h2>
       <div class="action-grid">
-        <a href="/vehicles/add" class="action-btn"><i class="fa-solid fa-plus"></i> Добави автомобил</a>
-        <a href="/requests/create" class="action-btn"><i class="fa-solid fa-wrench"></i> Нова заявка</a>
-        <a href="/requests" class="action-btn"><i class="fa-solid fa-clock-rotate-left"></i> История</a>
+        <a th:href="@{/add_vehicle}" class="action-btn"><i class="fa-solid fa-plus"></i> Add Vehicle</a>
+        <a th:href="@{/requests/new}" class="action-btn"><i class="fa-solid fa-wrench"></i> New Request</a>
+        <a href="/requests" class="action-btn"><i class="fa-solid fa-clock-rotate-left"></i> History</a>
       </div>
     </div>
 
-    <!-- Мини статистика -->
     <div class="dashboard-summary">
       <div class="stat-card">
-        <h3>3</h3>
-        <p>Активни заявки</p>
+        <h3 th:text="${activeRequests}">0</h3>
+        <p>Active Requests</p>
       </div>
       <div class="stat-card">
-        <h3>2</h3>
-        <p>Моите автомобили</p>
+        <h3 th:text="${vehicleCount}">0</h3>
+        <p>My Vehicles</p>
       </div>
       <div class="stat-card">
-        <h3>1</h3>
-        <p>В процес</p>
+        <h3 th:text="${inProgressRequests}">0</h3>
+        <p>In Progress</p>
       </div>
     </div>
 
   </div>
 </div>
 
-
-
-
 <div th:replace="~{fragments/footer :: footer}"></div>
 
 </body>
 </html>
-
-
-
-
-

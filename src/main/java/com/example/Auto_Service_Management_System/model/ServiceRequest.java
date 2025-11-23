@@ -3,43 +3,37 @@ package com.example.Auto_Service_Management_System.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class ServiceRequest {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private UUID id;
 
-    @Column(nullable = false)
-    private LocalDate requestDate;
-
-    @Column(nullable = false)
     private String description;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private RequestStatus status = RequestStatus.PENDING; // ENUM тип
+    private RequestStatus status;
+
+    private String mechanicId;
+    private String mechanicName;
+    private String mechanicSpecialization;
 
     @ManyToOne
-    @JoinColumn(name = "vehicle_id", nullable = false)
+    @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
 
     @ManyToOne
-    @JoinColumn(name = "mechanic_id")
-    private Mechanic mechanic;
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
 
-    @PrePersist
-    public void prePersist() {
-        if (requestDate == null) {
-            requestDate = LocalDate.now();
-        }
-    }
+    private LocalDateTime requestDate;
 }

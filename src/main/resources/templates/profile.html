@@ -1,10 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>My Profile</title>
+    <link rel="stylesheet" th:href="@{/css/style_header.css}">
+    <link rel="stylesheet" th:href="@{/css/style_login.css}">
+    <link rel="stylesheet" th:href="@{/css/style_footer2.css}">
 </head>
 <body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<div class="form-container">
+    <h2>My Profile</h2>
+
+    <div th:if="${successMessage}" class="alert success" th:text="${successMessage}"></div>
+
+    <form th:action="@{/profile}" th:object="${profileForm}" method="post">
+
+        <label for="firstName">First name</label>
+        <input id="firstName" type="text" th:field="*{firstName}" placeholder="Enter your first name">
+        <div class="error" th:if="${#fields.hasErrors('firstName')}"
+             th:errors="*{firstName}"></div>
+
+        <label for="lastName">Last name</label>
+        <input id="lastName" type="text" th:field="*{lastName}" placeholder="Enter your last name">
+        <div class="error" th:if="${#fields.hasErrors('lastName')}"
+             th:errors="*{lastName}"></div>
+
+        <label for="phoneNumber">Phone number</label>
+        <input id="phoneNumber" type="text" th:field="*{phoneNumber}" placeholder="Enter your phone number">
+        <div class="error" th:if="${#fields.hasErrors('phoneNumber')}"
+             th:errors="*{phoneNumber}"></div>
+
+        <button type="submit">Save changes</button>
+    </form>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
 
 </body>
 </html>

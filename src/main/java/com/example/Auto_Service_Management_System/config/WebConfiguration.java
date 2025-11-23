@@ -18,15 +18,16 @@ public class WebConfiguration {
         httpSecurity
                 .authorizeHttpRequests(matcher -> matcher
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers("/", "/register", "/login", "/contact").permitAll()
+                        .requestMatchers("/", "/register", "/login", "/contact", "/about_us").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")              // страница за вход
-                        .loginProcessingUrl("/login")     // URL на POST формата
-                        .usernameParameter("email")       // трябва да съвпада с name="email"
-                        .passwordParameter("password")    // трябва да съвпада с name="password"
-                        .defaultSuccessUrl("/home", true) // ✅ след успешен вход
+                        .loginPage("/login")
+                        .loginProcessingUrl("/login")
+                        .usernameParameter("email")
+                        .passwordParameter("password")
+                        .defaultSuccessUrl("/home", true)
                         .failureUrl("/login?error=true")
                         .permitAll()
                 )

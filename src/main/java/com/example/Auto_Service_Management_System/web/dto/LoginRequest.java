@@ -11,10 +11,10 @@ import lombok.*;
 @Builder
 public class LoginRequest {
 
-    @Email(message = "Въведи валиден имейл адрес")
-    @NotBlank(message = "Имейлът е задължителен")
+    @Email(message = "Enter a valid email address")
+    @NotBlank(message = "Email is required")
     private String email;
 
-    @NotBlank(message = "Паролата е задължителна")
+    @NotBlank(message = "Password is required")
     private String password;
 }

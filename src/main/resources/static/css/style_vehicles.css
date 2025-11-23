@@ -1,0 +1,60 @@
+body {
+    background: linear-gradient(to bottom, #dfe4ea, #a4b0be);
+    font-family: "Segoe UI", sans-serif;
+    color: #2f3542;
+    margin: 0;
+    padding: 0;
+}
+
+.vehicles-container {
+    width: 80%;
+    margin: 60px auto;
+    background: rgba(255,255,255,0.9);
+    border-radius: 12px;
+    padding: 20px 40px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1e272e;
+}
+
+.vehicle-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.vehicle-table th, .vehicle-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.vehicle-table th {
+    background-color: #576574;
+    color: #fff;
+}
+
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #28a745;
+    color: white;
+    padding: 14px 20px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    animation: fadeInOut 4s ease-in-out forwards;
+    font-size: 15px;
+    z-index: 9999;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-20px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; }
+    100% { opacity: 0; transform: translateY(-20px); }
+}

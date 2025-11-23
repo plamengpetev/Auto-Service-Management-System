@@ -1,61 +1,69 @@
-
-
-
 body {
-    background-image: url("../images/BetaServiceLogo.png"); /* сложи тук името на твоя файл */
-    background-size: contain;        /* показва цялата картинка */
-    background-repeat: no-repeat;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
+    background: url("../images/gray.png");
+    background-size: cover;
     background-position: center;
-    background-color: #f8f9fa;       /* светлосив фон */
-    height: 100vh;
+    color: #fff;
     margin: 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
-}
-
-/* Полупрозрачен слой, за да се вижда текстът */
-.overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    text-align: center;
 }
 
 
-/* Стил за текста */
-.content h1 {
-    font-size: 48px;
-    margin-bottom: 20px;
-}
 
-.content p {
-    font-size: 20px;
-    margin-bottom: 40px;
-}
-
-/* Бутони */
-.buttons {
+/* MAIN CONTENT */
+.main-content {
+    flex: 1;
     display: flex;
     justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 80px;
+}
+
+.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 20px;
 }
 
+.main-logo {
+    width: 280px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.center-content h1 {
+    font-size: 2.5rem;
+    color: #ffcc00;
+    margin-bottom: 30px;
+}
+
+/* BUTTONS IN ONE ROW */
+.button-row {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
 .btn {
-    background-color: #425f81;
-    color: white;
-    padding: 12px 24px;
-    text-decoration: none;
+    display: inline-block;
+    background-color: #ffcc00;
+    color: #000;
+    font-weight: bold;
+    padding: 12px 25px;
     border-radius: 8px;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    min-width: 130px;
 }
 
 .btn:hover {
-    background-color: #0056b3;
+    background-color: #e6b800;
+    transform: scale(1.05);
 }
 
 

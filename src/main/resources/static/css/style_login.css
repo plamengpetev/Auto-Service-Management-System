@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background: url('/images/garage_light_bg.png') no-repeat center center fixed;
+    background: url('../images/gray.png') no-repeat center center fixed;
     background-size: cover;
 }
 

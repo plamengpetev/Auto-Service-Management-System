@@ -2,8 +2,9 @@ package com.example.Auto_Service_Management_System.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -15,7 +16,8 @@ import java.util.UUID;
 public class Mechanic {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @JdbcTypeCode(SqlTypes.CHAR)
+    @Column(length = 36, nullable = false)
     private UUID id;
 
     @Column(nullable = false)
@@ -24,9 +26,8 @@ public class Mechanic {
     @Column(nullable = false)
     private String specialization;
 
-    @Column
     private String schedule;
 
-    @OneToMany(mappedBy = "mechanic", fetch = FetchType.LAZY)
-    private List<ServiceRequest> serviceRequests;
+    @Column(nullable = false)
+    private boolean available;
 }

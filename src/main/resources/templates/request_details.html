@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Request Details</title>
+
+    <link rel="stylesheet" th:href="@{/css/style_header.css}">
+    <link rel="stylesheet" th:href="@{/css/style_footer.css}">
+    <link rel="stylesheet" th:href="@{/css/style_request_details.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="page-container">
+
+    <h1>Request Details</h1>
+
+    <div class="details-box">
+
+        <div class="details-row">
+            <span class="label">Vehicle:</span>
+            <span th:text="${request.vehicle != null ? request.vehicle.brand + ' ' + request.vehicle.model : '—'}"></span>
+        </div>
+
+        <div class="details-row">
+            <span class="label">License Plate:</span>
+            <span th:text="${request.vehicle != null ? request.vehicle.registrationNumber : '—'}"></span>
+        </div>
+
+        <div class="details-row">
+            <span class="label">Description:</span>
+            <span th:text="${request.description}"></span>
+        </div>
+
+        <div class="details-row">
+            <span class="label">Date:</span>
+            <span th:text="${#temporals.format(request.requestDate, 'dd-MM-yyyy HH:mm')}"></span>
+        </div>
+
+        <div class="details-row">
+            <span class="label">Status:</span>
+            <span th:text="${request.status}"></span>
+        </div>
+
+        <div class="details-row">
+            <span class="label">Mechanic:</span>
+
+            <div th:if="${request.mechanicId != null}" class="mechanic-box">
+                <p><strong>Name:</strong> <span th:text="${request.mechanicName}"></span></p>
+                <p><strong>Specialization:</strong> <span th:text="${request.mechanicSpecialization}"></span></p>
+            </div>
+
+            <p th:if="${request.mechanicId == null}" class="no-mechanic">
+                ❗ No mechanic assigned yet.
+            </p>
+        </div>
+
+        <div th:if="${request.status.name() == 'PENDING'}">
+            <form th:action="@{'/requests/cancel/' + ${request.id}}" method="post">
+                <button type="submit" class="cancel-btn">❌ Cancel Request</button>
+            </form>
+        </div>
+
+        <a th:href="@{/requests}" class="back-btn">⬅ Back to all requests</a>
+
+    </div>
+
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

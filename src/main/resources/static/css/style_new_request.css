@@ -1,0 +1,174 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.45),
+            rgba(0, 0, 0, 0.45)
+    ), url('../images/gray.png') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    min-height: 100vh;
+}
+
+.page-container {
+    width: 80%;
+    margin: 120px auto 40px auto; /* ⬅⬅⬅ Добавено: пуска формата надолу */
+    background: rgba(0, 0, 0, 0.55);
+    padding: 30px;
+    border-radius: 12px;
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 15px rgba(0,0,0,0.6);
+}
+
+
+h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #4CAF50;
+    text-shadow: 0 0 10px rgba(76,175,80,0.7);
+}
+
+/* Таблица */
+.requests-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255,255,255,0.08);
+}
+
+.requests-table th {
+    background: rgba(0,0,0,0.8);
+    padding: 12px;
+    color: #4CAF50;
+}
+
+.requests-table td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.requests-table tr:hover {
+    background: rgba(255,255,255,0.1);
+}
+
+/* Бутони */
+.details-btn,
+.cancel-btn,
+.submit-btn,
+.back-btn {
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.details-btn {
+    background: rgba(0,0,0,0.6);
+    color: #4CAF50;
+}
+
+.details-btn:hover {
+    background: #4CAF50;
+    color: white;
+}
+
+.cancel-btn {
+    background: rgba(217, 83, 79, 0.7);
+    color: white;
+}
+
+.cancel-btn:hover {
+    background: #d9534f;
+    box-shadow: 0 0 10px rgba(217,83,79,0.7);
+}
+
+.submit-btn {
+    background: #4CAF50;
+    color: white;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.submit-btn:hover {
+    background: #45a049;
+}
+
+.back-btn {
+    display: inline-block;
+    margin-top: 20px;
+    color: #ccc;
+}
+
+.back-btn:hover {
+    color: #fff;
+}
+
+/* Формуляри */
+
+.request-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.request-form select,
+.request-form textarea {
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    resize: none;
+}
+
+/* Полета във формата */
+select,
+textarea {
+    width: 100%;
+    padding: 12px;        /* 🔥 По-компактно */
+    border-radius: 8px;
+    border: none;
+    margin-bottom: 18px;
+    font-size: 1.1em;     /* 🔥 По-голям текст вътре */
+    background: rgba(255,255,255,0.9);
+    color: #000;
+}
+
+/* Текстово поле */
+textarea {
+    height: 120px;        /* 🔥 По-компактно от преди */
+    resize: none;
+}
+
+
+/* Бутон */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1.2em;      /* 🔥 По-голям текст */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #3e8e41;
+    transform: translateY(-2px);
+}
+
+/* Линк "Назад" */
+a {
+    display: inline-block;
+    margin-top: 20px;
+    color: #fff;
+    font-size: 1.1em;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

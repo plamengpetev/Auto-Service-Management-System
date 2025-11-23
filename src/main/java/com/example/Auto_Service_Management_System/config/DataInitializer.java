@@ -4,9 +4,11 @@ import com.example.Auto_Service_Management_System.model.Role;
 import com.example.Auto_Service_Management_System.repository.RoleRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
+@Profile("!test")
 public class DataInitializer {
 
     @Autowired

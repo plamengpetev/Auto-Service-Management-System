@@ -1,34 +1,30 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Beta Auto Service</title>
+    <title>Best Auto Service</title>
     <link rel="stylesheet" th:href="@{/css/style_header.css}">
     <link rel="stylesheet" th:href="@{/css/style_index.css}">
     <link rel="stylesheet" th:href="@{/css/style_footer.css}">
 </head>
 <body>
 
-
-
 <div th:replace="fragments/header :: header"></div>
 
+<main class="main-content">
+    <div class="center-content">
+        <img src="/images/Logo.png" alt="BestAutoService Logo" class="main-logo">
+        <h1>BestAutoService</h1>
 
-<div class="overlay">
-    <div class="content">
-        <h1>Beta Auto Service</h1>
-        <p>Управлявайте клиенти, автомобили и ремонти лесно и бързо!</p>
-        <div class="buttons">
-            <a th:href="@{/register}" class="btn">Customers</a>
-            <a th:href="@{/cars}" class="btn">Автомобили</a>
-            <a th:href="@{/services}" class="btn">Ремонти</a>
+        <div class="button-row">
+            <a th:href="@{/login}" class="btn"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+            <a th:href="@{/register}" class="btn"><i class="fa-solid fa-user-plus"></i> Register</a>
+            <a th:href="@{/contact}" class="btn"><i class="fa-solid fa-envelope"></i> Contact</a>
         </div>
     </div>
-</div>
+</main>
 
 <div th:replace="fragments/footer :: footer"></div>
 
 </body>
-
-
 </html>

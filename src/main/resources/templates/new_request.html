@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Service Request</title>
+
+    <link rel="stylesheet" th:href="@{/css/style_header.css}">
+    <link rel="stylesheet" th:href="@{/css/style_new_request.css}">
+    <link rel="stylesheet" th:href="@{/css/style_footer.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="page-container">
+
+    <h1>Create New Request</h1>
+
+    <form th:action="@{/requests/new}" method="post" class="request-form">
+
+        <label for="vehicle">Select a vehicle:</label>
+        <select name="vehicleId" id="vehicle" required>
+            <option th:each="v : ${vehicles}"
+                    th:value="${v.id}"
+                    th:text="${v.brand + ' ' + v.model + ' (' + v.registrationNumber + ')'}"></option>
+        </select>
+
+        <label for="description">Problem Description:</label>
+        <textarea name="description" id="description" required></textarea>
+
+        <button type="submit" class="submit-btn">Submit Request</button>
+    </form>
+
+    <a class="back-btn" href="/requests">⬅ Back to My Requests</a>
+
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Requests</title>
+
+    <link rel="stylesheet" th:href="@{/css/style_header.css}">
+    <link rel="stylesheet" th:href="@{/css/style_new_request.css}">
+    <link rel="stylesheet" th:href="@{/css/style_footer.css}">
+</head>
+<body>
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="page-container">
+
+    <h1>My Requests</h1>
+
+    <table class="requests-table">
+        <thead>
+        <tr>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="r : ${requests}">
+            <td th:text="${r.description}"></td>
+            <td th:text="${#temporals.format(r.requestDate, 'dd-MM-yyyy HH:mm')}"></td>
+            <td th:text="${r.status}"></td>
+
+            <td>
+                <a class="details-btn" th:href="@{'/requests/details/' + ${r.id}}">Details</a>
+
+                <form th:if="${r.status.name() == 'PENDING'}"
+                      th:action="@{'/requests/cancel/' + ${r.id}}"
+                      method="post"
+                      class="inline-form">
+                    <button class="cancel-btn">Cancel</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

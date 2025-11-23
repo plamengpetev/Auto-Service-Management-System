@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
+  <link rel="stylesheet" th:href="@{/css/style_header.css}">
+  <link rel="stylesheet" th:href="@{/css/style_admin.css}">
+  <link rel="stylesheet" th:href="@{/css/style_footer.css}">
+
+  <style>
+    .scroll-container {
+      max-height: 450px;
+      overflow-y: auto;
+      border: 1px solid #444;
+      border-radius: 8px;
+      padding: 5px;
+      background: rgba(0,0,0,0.1);
+      margin-bottom: 15px;
+    }
+
+    .mechanic-select {
+      padding: 5px;
+      margin-right: 8px;
+      border-radius: 5px;
+    }
+
+    .auto-btn {
+      background-color: #4CAF50;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+  </style>
+</head>
+<body>
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="admin-container">
+  <h1>Admin Panel</h1>
+
+  <section>
+    <h2>👥 Users</h2>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Roles</th>
+        <th>Actions</th>
+      </tr>
+
+      <tr th:each="c : ${customers}">
+        <td th:text="${c.firstName + ' ' + c.lastName}"></td>
+        <td th:text="${c.email}"></td>
+        <td th:text="${c.phoneNumber}"></td>
+        <td><span th:each="r : ${c.roles}" th:text="${r.name} + ' '"></span></td>
+
+        <td>
+          <form th:action="@{'/admin/users/make-admin/' + ${c.email}}" method="post" style="display:inline;">
+            <button class="assign-btn">ADMIN</button>
+          </form>
+
+          <form th:action="@{'/admin/users/make-user/' + ${c.email}}" method="post" style="display:inline;">
+            <button class="release-btn">USER</button>
+          </form>
+        </td>
+      </tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>🚗 Vehicles</h2>
+    <table>
+      <tr>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>License Plate</th>
+        <th>Owner</th>
+      </tr>
+
+      <tr th:each="v : ${vehicles}">
+        <td th:text="${v.brand}"></td>
+        <td th:text="${v.model}"></td>
+        <td th:text="${v.registrationNumber}"></td>
+        <td th:text="${v.owner.email}"></td>
+      </tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>🧾 Service Requests</h2>
+
+    <div class="scroll-container">
+      <table>
+        <tr>
+          <th>Description</th>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Vehicle</th>
+          <th>Assign Mechanic</th>
+        </tr>
+
+        <tr th:each="r : ${requests}">
+          <td th:text="${r.description}"></td>
+          <td th:text="${r.requestDate != null ? #temporals.format(r.requestDate, 'dd-MM-yyyy HH:mm') : '—'}"></td>
+          <td th:text="${r.status != null ? r.status : '—'}"></td>
+          <td th:text="${r.vehicle != null ? r.vehicle.registrationNumber : '—'}"></td>
+
+          <td>
+            <!-- Manual assignment -->
+            <form th:if="${r.status != null and r.status.name() == 'PENDING'}"
+                  th:action="@{'/admin/assign/' + ${r.id}}" method="post">
+
+              <select name="mechanicId" class="mechanic-select" required>
+                <option value="" disabled selected>Select mechanic</option>
+                <option th:each="m : ${mechanics}"
+                        th:if="${m.available}"
+                        th:value="${m.id}"
+                        th:text="${m.name + ' (' + m.specialization + ')'}">
+                </option>
+              </select>
+
+              <button type="submit" class="assign-btn">Assign</button>
+            </form>
+
+            <!-- AUTO ASSIGN BUTTON -->
+            <form th:if="${r.status != null and r.status.name() == 'PENDING'}"
+                  th:action="@{'/admin/assign/auto/' + ${r.id}}"
+                  method="post"
+                  style="margin-top: 5px;">
+              <button type="submit" class="auto-btn">Auto Assign</button>
+            </form>
+
+            <!-- Release assigned mechanic -->
+            <form th:if="${r.status != null and r.status.name() == 'IN_PROGRESS'}"
+                  th:action="@{'/admin/release/' + ${r.id}}" method="post">
+              <button class="release-btn">Release</button>
+            </form>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div th:if="${successMessage}" class="alert success" th:text="${successMessage}"></div>
+    <div th:if="${errorMessage}" class="alert error" th:text="${errorMessage}"></div>
+  </section>
+
+  <section>
+    <h2>🔧 Mechanics</h2>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Specialization</th>
+        <th>Available</th>
+        <th>Status</th>
+      </tr>
+
+      <tr th:each="m : ${mechanics}">
+        <td th:text="${m.name}"></td>
+        <td th:text="${m.specialization}"></td>
+
+        <td>
+          <span th:if="${m.available}">✅ Yes</span>
+          <span th:unless="${m.available}">❌ No</span>
+        </td>
+
+        <td>
+          <span th:if="${!m.available}">Busy</span>
+          <span th:if="${m.available}">—</span>
+        </td>
+      </tr>
+    </table>
+  </section>
+
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Add Vehicle</title>
+    <link rel="stylesheet" th:href="@{/css/style_header.css}">
+    <link rel="stylesheet" th:href="@{/css/style_footer2.css}">
+    <link rel="stylesheet" th:href="@{/css/style_add_vehicle.css}">
 </head>
 <body>
+
+<div th:replace="~{fragments/header :: header}"></div>
+
+<div class="add-vehicle-container">
+    <div class="vehicle-card">
+        <h2>Add New Vehicle</h2>
+
+        <form th:action="@{/add_vehicle}" method="post" class="vehicle-form">
+            <div class="input-group">
+                <label>Brand:</label>
+                <label>
+                    <input type="text" name="brand" required>
+                </label>
+            </div>
+
+            <div class="input-group">
+                <label>Model:</label>
+                <label>
+                    <input type="text" name="model" required>
+                </label>
+            </div>
+
+            <div class="input-group">
+                <label>Year:</label>
+                <label>
+                    <input type="number" name="year" required>
+                </label>
+            </div>
+
+            <div class="input-group">
+                <label>License Plate:</label>
+                <label>
+                    <input type="text" name="registrationNumber" required>
+                </label>
+            </div>
+
+            <button type="submit" class="submit-btn">💾 Save Vehicle</button>
+            <a th:href="@{/my_vehicles}" class="back-btn">⬅ Back</a>
+        </form>
+    </div>
+</div>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
 
 </body>
 </html>

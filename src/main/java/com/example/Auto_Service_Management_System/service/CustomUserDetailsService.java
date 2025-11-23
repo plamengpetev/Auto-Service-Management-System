@@ -2,9 +2,8 @@ package com.example.Auto_Service_Management_System.service;
 
 import com.example.Auto_Service_Management_System.model.Customer;
 import com.example.Auto_Service_Management_System.repository.CustomerRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.Auto_Service_Management_System.web.advice.NotFoundException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,20 +21,16 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Customer customer = customerRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+                .orElseThrow(() -> new NotFoundException("User not found"));
 
         var authorities = customer.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .toList();
 
         return org.springframework.security.core.userdetails.User.builder()
-                .username(customer.getFirstName())
+                .username(customer.getEmail())
                 .password(customer.getPassword())
                 .authorities(authorities)
                 .build();
     }
-
-
 }
-
-

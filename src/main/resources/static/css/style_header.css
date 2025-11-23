@@ -18,9 +18,9 @@ header.site-header {
 }
 
 .site-header .logo {
-    font-weight: 700;
-    font-size: 1.15rem;
-    color: #ffcc00;
+    font-weight: 800;
+    font-size: 1.50rem;
+    color: #f4cf55;
 }
 
 .site-header .menu {
@@ -46,5 +46,5 @@ header.site-header {
 
 /* за да не влиза съдържанието под фиксирания header */
 .page-offset {
-    height: 68px; /* колкото е височината на header-а */
+    height: 50px; /* колкото е височината на header-а */
 }
