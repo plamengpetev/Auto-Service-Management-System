@@ -21,7 +21,7 @@ User:- Register / Login / Logout
   Integration with REST Microservice
   Main app uses Feign Client to call:- GET /api/mechanics- POST /api/mechanics/assign- PUT /api/mechanics/{id}/availability
   Database Model
-  Entities using UUID:- Customer- Vehicle- ServiceRequest- Role
+  Entities using UUID:- Customer- Vehicle- ServiceRequest- Role 
   Relationships:- Customer 1–M Vehicle- Vehicle 1–M ServiceRequest- Customer M–N Role
   Scheduling & Caching- Daily cron: auto-cancel old pending requests- Fixed-rate: log active requests 
 - count- Cacheable: customers, requests, vehicles- CacheEvict on modifications
