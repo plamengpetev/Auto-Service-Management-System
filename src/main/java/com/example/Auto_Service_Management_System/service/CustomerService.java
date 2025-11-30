@@ -78,12 +78,12 @@ public class CustomerService {
         Customer customer = customerRepository.findByEmail(request.getEmail())
                 .orElseThrow(() -> {
                     logger.warn("Login failed — email [{}] not found", request.getEmail());
-                    return new NotFoundException("Потребител с този имейл не съществува.");
+                    return new NotFoundException("A user with this email does not exist.");
                 });
 
         if (!passwordEncoder.matches(request.getPassword(), customer.getPassword())) {
             logger.warn("Login failed — incorrect password for [{}]", request.getEmail());
-            throw new NotFoundException("Грешен имейл или парола.");
+            throw new NotFoundException("Invalid email or password.");
         }
 
         logger.info("User [{}] logged in successfully", request.getEmail());

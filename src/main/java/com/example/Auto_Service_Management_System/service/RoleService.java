@@ -28,10 +28,10 @@ public class RoleService {
 
     private void assignRole(String email, String roleName) {
         Customer customer = customerRepository.findByEmail(email)
-                .orElseThrow(() -> new NotFoundException("Потребителят не е намерен"));
+                .orElseThrow(() -> new NotFoundException("User not found."));
 
         Role role = roleRepository.findByName(roleName)
-                .orElseThrow(() -> new NotFoundException("Ролята " + roleName + " не е намерена"));
+                .orElseThrow(() -> new NotFoundException("Role " + roleName + " not found"));
 
         customer.getRoles().clear();
         customer.getRoles().add(role);
