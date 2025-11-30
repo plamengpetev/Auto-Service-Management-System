@@ -12,9 +12,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    // --------------------------------------------------------------
-    // CUSTOM EXCEPTION (your NotFoundException)
-    // --------------------------------------------------------------
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String handleNotFound(NotFoundException ex,
@@ -24,22 +21,17 @@ public class GlobalExceptionHandler {
 
         String uri = request.getRequestURI();
 
-        // ADMIN area → redirect
         if (uri.startsWith("/admin")) {
             redirect.addFlashAttribute("errorMessage", ex.getMessage());
             return "redirect:/admin/dashboard";
         }
 
-        // Normal users → error page
         model.addAttribute("status", 404);
         model.addAttribute("error", "Resource not found");
         model.addAttribute("message", ex.getMessage());
         return "error";
     }
 
-    // --------------------------------------------------------------
-    // BUILT-IN EXCEPTION: IllegalArgumentException
-    // --------------------------------------------------------------
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handleIllegalArgument(IllegalArgumentException ex, Model model) {
@@ -49,10 +41,6 @@ public class GlobalExceptionHandler {
         return "error";
     }
 
-    // --------------------------------------------------------------
-    // BUILT-IN EXCEPTION: IllegalStateException
-    // (Used for mechanic availability, auto-assign errors, bad status etc.)
-    // --------------------------------------------------------------
     @ExceptionHandler(IllegalStateException.class)
     public String handleIllegalState(IllegalStateException ex,
                                      HttpServletRequest request,
@@ -61,23 +49,17 @@ public class GlobalExceptionHandler {
 
         String uri = request.getRequestURI();
 
-        // Admin area requires redirect (important for POST actions)
         if (uri.startsWith("/admin")) {
             redirect.addFlashAttribute("errorMessage", ex.getMessage());
             return "redirect:/admin/dashboard";
         }
 
-        // Normal user → show error page
         model.addAttribute("status", 400);
         model.addAttribute("error", "Invalid operation");
         model.addAttribute("message", ex.getMessage());
         return "error";
     }
 
-    // --------------------------------------------------------------
-    // BUILT-IN EXCEPTION: AccessDeniedException
-    // (Spring Security)
-    // --------------------------------------------------------------
     @ExceptionHandler(AccessDeniedException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public String handleAccessDenied(AccessDeniedException ex, Model model) {
@@ -87,9 +69,6 @@ public class GlobalExceptionHandler {
         return "error";
     }
 
-    // --------------------------------------------------------------
-    // FALLBACK EXCEPTION
-    // --------------------------------------------------------------
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public String handleGeneral(Exception ex, Model model) {

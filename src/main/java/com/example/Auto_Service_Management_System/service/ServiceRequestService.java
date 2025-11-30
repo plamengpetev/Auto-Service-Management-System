@@ -43,9 +43,6 @@ public class ServiceRequestService {
         this.mechanicClient = mechanicClient;
     }
 
-    // ------------------------------------------------------------
-    // CREATE REQUEST
-    // ------------------------------------------------------------
     @CacheEvict(value = "requestsByEmail", key = "#email")
     public void createRequest(String email, UUID vehicleId, String description) {
         logger.info("Creating request for [{}], vehicle [{}]", email, vehicleId);
@@ -69,26 +66,17 @@ public class ServiceRequestService {
         logger.info("Request [{}] created successfully", request.getId());
     }
 
-    // ------------------------------------------------------------
-    // FETCH REQUESTS BY EMAIL (CACHED)
-    // ------------------------------------------------------------
     @Cacheable(value = "requestsByEmail", key = "#email")
     public List<ServiceRequest> getRequestsByEmail(String email) {
         logger.info("Fetching service requests for [{}]", email);
         return requestRepository.findByCustomerEmail(email);
     }
 
-    // ------------------------------------------------------------
-    // FETCH SINGLE REQUEST
-    // ------------------------------------------------------------
     public ServiceRequest getRequest(UUID id) {
         return requestRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Request not found"));
     }
 
-    // ------------------------------------------------------------
-    // CANCEL REQUEST
-    // ------------------------------------------------------------
     @CacheEvict(value = "requestsByEmail", key = "#userEmail")
     public void cancel(UUID requestId, String userEmail) {
         ServiceRequest request = getRequest(requestId);
@@ -107,9 +95,6 @@ public class ServiceRequestService {
         logger.info("Request [{}] cancelled by {}", requestId, userEmail);
     }
 
-    // ------------------------------------------------------------
-    // AUTO ASSIGN MECHANIC (POST to microservice)
-    // ------------------------------------------------------------
     @Transactional
     @CacheEvict(value = "requestsByEmail", allEntries = true)
     public void autoAssignMechanic(UUID requestId) {
@@ -140,9 +125,6 @@ public class ServiceRequestService {
         logger.info("AUTO Assigned mechanic [{}] to request [{}]", mechanic.getId(), requestId);
     }
 
-    // ------------------------------------------------------------
-    // MANUAL ASSIGN (via dropdown)
-    // ------------------------------------------------------------
     @Transactional
     @CacheEvict(value = "requestsByEmail", allEntries = true)
     public void assignSpecificMechanic(UUID requestId, UUID mechanicId) {
@@ -171,9 +153,6 @@ public class ServiceRequestService {
         logger.info("MANUAL Assigned mechanic [{}] to request [{}]", mechanicId, requestId);
     }
 
-    // ------------------------------------------------------------
-    // RELEASE MECHANIC
-    // ------------------------------------------------------------
     @Transactional
     @CacheEvict(value = "requestsByEmail", allEntries = true)
     public void releaseMechanic(UUID requestId) {
@@ -194,9 +173,6 @@ public class ServiceRequestService {
         logger.info("Released mechanic [{}] from request [{}]", mechanicId, requestId);
     }
 
-    // ------------------------------------------------------------
-    // COUNT REQUESTS
-    // ------------------------------------------------------------
     public long countRequestsByStatus(String email, String status) {
         RequestStatus s = RequestStatus.valueOf(status);
         return requestRepository.countByCustomerEmailAndStatus(email, s);
